@@ -5,9 +5,9 @@ public class Moving : MonoBehaviour
     bool move, _combine;
     int _x2, _y2;
 
-    float xOffset = 1.3631f;
-    float yOffset = -3.019f;
-    float interval = 0.8971f;
+    float xOffset = 1.356f;
+    float yOffset = -3.224f;
+    float interval = 0.905f;
 
     void Update() { if (move) Move(_x2, _y2, _combine); }
 

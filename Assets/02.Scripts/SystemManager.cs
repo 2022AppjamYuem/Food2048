@@ -21,9 +21,9 @@ public class SystemManager : MonoBehaviour
     Vector3 firstPos, gap;
     GameObject[,] Square = new GameObject[4, 4];
 
-    float xOffset = 1.3631f;
-    float yOffset = -3.019f;
-    float interval = 0.8971f;
+    float xOffset = 1.356f;
+    float yOffset = -3.224f;
+    float interval = 0.905f;
 
     private bool firstCheck;
     private int maxLevel;
@@ -31,7 +31,7 @@ public class SystemManager : MonoBehaviour
     // x 1.62
     // y 1.62
 
-    // 1.3631 - 0.466 = 0.8971
+    // 1.356f - 0.451 = 0.905f
 
 
     void Start()
