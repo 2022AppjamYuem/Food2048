@@ -519,7 +519,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ec03f79379868c642b48ae5ddc821b6d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 230d011112ee57a488a69c0116180ed1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -550,9 +550,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goodsName: "\uBBF8\uB2C8\uC778\uD615"
-  goodsSprite: {fileID: 0}
+  goodsSprite: {fileID: 21300000, guid: 230d011112ee57a488a69c0116180ed1, type: 3}
   soldOutSprite: {fileID: 0}
   price: 2
+  index: 0
 --- !u!1 &625717408
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,9 +945,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goodsName: "\uBA54\uB274\uD310"
-  goodsSprite: {fileID: 0}
+  goodsSprite: {fileID: 21300000, guid: 070bead6d99f9d34e896e00942b04c0f, type: 3}
   soldOutSprite: {fileID: 0}
   price: 3
+  index: 0
 --- !u!114 &1155229238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,7 +1025,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ec03f79379868c642b48ae5ddc821b6d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 070bead6d99f9d34e896e00942b04c0f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1667,9 +1669,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goodsName: "\uB300\uD615\uC778\uD615"
-  goodsSprite: {fileID: 0}
+  goodsSprite: {fileID: 21300000, guid: d8fa52815d0b0684e9970c8d40790e6c, type: 3}
   soldOutSprite: {fileID: 0}
   price: 4
+  index: 0
 --- !u!114 &1495530765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1746,7 +1749,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ec03f79379868c642b48ae5ddc821b6d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d8fa52815d0b0684e9970c8d40790e6c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2708,6 +2711,10 @@ PrefabInstance:
     - target: {fileID: 8697897674404776213, guid: ffd34d9345270644199cc895083c32e8, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697897674404776213, guid: ffd34d9345270644199cc895083c32e8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffd34d9345270644199cc895083c32e8, type: 3}
