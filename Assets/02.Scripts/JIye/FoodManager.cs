@@ -47,7 +47,7 @@ public class FoodManager : MonoBehaviour
     public GameObject TryMerge(Food food1, Food food2, Vector2 Pos)
     {
 
-        if(food1.foodName == "쓰레기" || food2.foodName == "쓰레기") return;
+        if(food1.foodName == "쓰레기" || food2.foodName == "쓰레기") return null;
 
         if(food1.foodName == food2.foodName)        //실패한 경우
         {
@@ -130,6 +130,18 @@ public class FoodManager : MonoBehaviour
         if (food.myFood == receip && food.myLevel > 4)
         {
             //성공
+            var obj = FindObjectsOfType<Food>();
+            for (int i = 0; i < obj.Length; i++)
+            {
+                if (obj[i].foodName=="쓰레기")
+                {
+                    Destroy(obj[i]);
+                    MoneyCount.instance.MakeTrash();
+                }
+
+            }
+            MoneyCount.instance.SalesRamen();
+            DialogueData.instance.OrderEnd();
         }
         else
         {

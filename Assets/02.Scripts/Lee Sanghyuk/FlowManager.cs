@@ -20,6 +20,7 @@ namespace _02.Scripts.Lee_Sanghyuk
                 if (_playTime>=180)
                 {
                     print("하루끝남");
+                    MoneyCount.instance.Calculate();
                 }
             }
         }
