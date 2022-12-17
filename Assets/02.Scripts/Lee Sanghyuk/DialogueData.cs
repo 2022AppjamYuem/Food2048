@@ -16,11 +16,13 @@ namespace _02.Scripts.Lee_Sanghyuk
     public class DialogueData : MonoBehaviour
     {
         public TMP_Text orderText;
-        public GameObject NPC;
-        public GameObject tspeechbubble;
+        public GameObject[] NPC;
+        public GameObject speechbubble;
         public FoodEnum receip;
 
         public static DialogueData instance;
+
+        private int npcNum;
 
         private void Awake()
         {
@@ -54,8 +56,9 @@ namespace _02.Scripts.Lee_Sanghyuk
         /// </summary>
         public void Order()
         {
-            NPC.SetActive(true);
-            NPC.transform.DOMove(new Vector3(-1.36f,1,0), 1).OnComplete(() =>
+            npcNum = Random.Range(0, 3);
+            NPC[npcNum].SetActive(true);
+            NPC[npcNum].transform.DOMove(new Vector3(-1.36f,1,0), 1).OnComplete(() =>
             {
                 int orderDetails = 0;
                 var selectMenu = Random.Range(0, 3);
@@ -71,7 +74,7 @@ namespace _02.Scripts.Lee_Sanghyuk
                         orderDetails = 2;
                         break;
                 }
-                tspeechbubble.gameObject.SetActive(true);
+                speechbubble.SetActive(true);
                 orderText.text = _menuName[orderDetails];
                 receip = (FoodEnum)(selectMenu);
                 FoodManager.instance.SetReceip(receip);
@@ -82,10 +85,11 @@ namespace _02.Scripts.Lee_Sanghyuk
 
         public void OrderEnd()
         {
-            NPC.transform.DOMove(new Vector3(-3.8f,1,1), 1).OnComplete(() =>
+            NPC[npcNum].transform.DOMove(new Vector3(-3.8f,1,1), 1).OnComplete(() =>
             {
-                tspeechbubble.SetActive(false);
-                NPC.SetActive(false);
+                orderText.text = "";
+                speechbubble.SetActive(false);
+                NPC[npcNum].SetActive(false);
                 Order();
             });
         }
