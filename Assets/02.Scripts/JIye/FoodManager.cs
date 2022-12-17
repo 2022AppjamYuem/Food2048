@@ -132,7 +132,7 @@ public class FoodManager : MonoBehaviour
 
     private void CheckReceip(Food food)
     {
-        if (food.foodName == receip.foodName)
+        if (food.foodName == receip.foodName && food.myLevel > 4)
         {
             //¼º°ø
         }
