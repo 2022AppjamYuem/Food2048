@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tempFood1: {fileID: 0}
   tempFood2: {fileID: 0}
-  receip: 0
+  receip: 2
   trashPrefab: {fileID: 6452866252832966104, guid: 9e420bdcef548e84aaf1f4a1de986160, type: 3}
 --- !u!4 &371796878
 Transform:
