@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4365997328894925905}
   - component: {fileID: 4365997328894925904}
   - component: {fileID: 5936093505617094147}
-  - component: {fileID: -3634034408400584751}
+  - component: {fileID: -2231696581800183012}
   m_Layer: 0
-  m_Name: Potato
+  m_Name: Potato2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 53
   m_Sprite: {fileID: 21300000, guid: b281fb54808e7ce4f83635c1e54638c1, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fce23b2153f44546a82569523b5e308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &-3634034408400584751
+--- !u!95 &-2231696581800183012
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0

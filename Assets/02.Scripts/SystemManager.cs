@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,11 +13,21 @@ public class SystemManager : MonoBehaviour
     Vector3 firstPos, gap;
     GameObject[,] Square = new GameObject[4, 4];
 
+    float xOffset = 1.62f;
+    float yOffset = 1.62f;
+    float interval = 1.078f;
+
+    // x 1.62
+    // y 1.62
+
+    // 1.62 - 0.542 = 1.078
+
+
     void Start()
     {
         Spawn();
         Spawn();
-        BestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
+        //BestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
     }
 
     void Update()
@@ -59,16 +68,16 @@ public class SystemManager : MonoBehaviour
                     l = 0;
 
                     // Á¡¼ö
-                    if (score > 0)
-                    {
-                        Plus.text = "+" + score.ToString() + "    ";
-                        Plus.GetComponent<Animator>().SetTrigger("PlusBack");
-                        Plus.GetComponent<Animator>().SetTrigger("Plus");
-                        Score.text = (int.Parse(Score.text) + score).ToString();
-                        if (PlayerPrefs.GetInt("BestScore", 0) < int.Parse(Score.text)) PlayerPrefs.SetInt("BestScore", int.Parse(Score.text));
-                        BestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
-                        score = 0;
-                    }
+                    //if (score > 0)
+                    //{
+                    //    Plus.text = "+" + score.ToString() + "    ";
+                    //    Plus.GetComponent<Animator>().SetTrigger("PlusBack");
+                    //    Plus.GetComponent<Animator>().SetTrigger("Plus");
+                    //    Score.text = (int.Parse(Score.text) + score).ToString();
+                    //    if (PlayerPrefs.GetInt("BestScore", 0) < int.Parse(Score.text)) PlayerPrefs.SetInt("BestScore", int.Parse(Score.text));
+                    //    BestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
+                    //    score = 0;
+                    //}
 
                     for (x = 0; x <= 3; x++) for (y = 0; y <= 3; y++)
                         {
@@ -108,7 +117,7 @@ public class SystemManager : MonoBehaviour
             Square[x1, y1].GetComponent<Moving>().Move(x2, y2, true);
             Destroy(Square[x2, y2]);
             Square[x1, y1] = null;
-            Square[x2, y2] = Instantiate(n[j + 1], new Vector3(1.2f * x2 - 1.8f, 1.2f * y2 - 1.8f, 0), Quaternion.identity);
+            Square[x2, y2] = Instantiate(n[j + 1], new Vector3(interval * x2 - xOffset, interval * y2 - yOffset, 0), Quaternion.identity);
             Square[x2, y2].tag = "Combine";
             Square[x2, y2].GetComponent<Animator>().SetTrigger("Combine");
             score += (int)Mathf.Pow(2, j + 2);
@@ -119,7 +128,9 @@ public class SystemManager : MonoBehaviour
     void Spawn()
     {
         while (true) { x = Random.Range(0, 4); y = Random.Range(0, 4); if (Square[x, y] == null) break; }
-        Square[x, y] = Instantiate(Random.Range(0, int.Parse(Score.text) > 800 ? 4 : 8) > 0 ? n[0] : n[1], new Vector3(1.2f * x - 1.8f, 1.2f * y - 1.8f, 0), Quaternion.identity);
+        Square[x, y] = Instantiate(n[0], new Vector3(interval * x - xOffset, interval * y - yOffset, 0), Quaternion.identity);
+        
+        //Square[x, y] = Instantiate(Random.Range(0, int.Parse(Score.text) > 800 ? 4 : 8) > 0 ? n[0] : n[1], new Vector3(interval * x - xOffset, interval * y - yOffset, 0), Quaternion.identity);
         Square[x, y].GetComponent<Animator>().SetTrigger("Spawn");
     }
 }
