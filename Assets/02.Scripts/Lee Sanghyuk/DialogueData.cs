@@ -70,6 +70,7 @@ namespace _02.Scripts.Lee_Sanghyuk
                         orderDetails = 2;
                         break;
                 }
+                orderText.gameObject.SetActive(true);
                 orderText.text = _menuName[orderDetails];
                 receip = (FoodEnum)(selectMenu);
                 FoodManager.instance.SetReceip(receip);
@@ -78,10 +79,14 @@ namespace _02.Scripts.Lee_Sanghyuk
 
         }
 
-        private IEnumerator OrderTime()
+        public void OrderEnd()
         {
-            yield return new WaitForSeconds(1);
-            NPC.SetActive(false);
+            NPC.transform.DOMove(new Vector3(1,1,1), 1).OnComplete(() =>
+            {
+                orderText.gameObject.SetActive(false);
+                NPC.SetActive(false);
+                Order();
+            });
         }
     }
 }
