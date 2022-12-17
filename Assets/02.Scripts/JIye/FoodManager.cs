@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class FoodManager : MonoBehaviour
 {
-
+    //Temp
     [SerializeField] Food tempFood1;
     [SerializeField] Food tempFood2;
 
-    [SerializeField] GameObject[] foodPrefabs;
-
     public static FoodManager instance = null;
+
 
     private void Awake()
     {
@@ -37,7 +36,15 @@ public class FoodManager : MonoBehaviour
     public void Merge(Food food1, Food food2)
     {
         Transform trans = food1.gameObject.transform;
-        Instantiate(food1.nextFood, trans.position, Quaternion.identity);
+
+        if (food1.nextFood != null)
+        {
+            Instantiate(food1.nextFood, trans.position, Quaternion.identity);
+        }
+        else
+        {
+
+        }
 
         Destroy(food1.gameObject);
         Destroy(food2.gameObject);

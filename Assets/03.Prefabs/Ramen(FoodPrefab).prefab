@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6452866252832966107}
   - component: {fileID: 6452866252832966101}
   m_Layer: 0
-  m_Name: Chasu(FoodPrefab)
+  m_Name: Ramen(FoodPrefab)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f98bba4200a2795458b5042c5b0cae42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 20b8053994d228046b627e71c1626248, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,6 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1e83bf4add3b0448752c2d30751866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myLevel: 1
-  foodName: "\uCC28\uC288"
-  nextFood: {fileID: 6452866252832966104, guid: ba9a1644ecd38e04199872cac61a06e5, type: 3}
+  myLevel: 3
+  foodName: "\uB77C\uBA74"
+  nextFood: {fileID: 0}

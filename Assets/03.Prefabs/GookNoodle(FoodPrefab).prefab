@@ -99,3 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myLevel: 1
   foodName: "\uBA74\uAD6D\uBB3C"
+  nextFood: {fileID: 6452866252832966104, guid: ba9a1644ecd38e04199872cac61a06e5, type: 3}
