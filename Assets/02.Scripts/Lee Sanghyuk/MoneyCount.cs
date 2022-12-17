@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _02.Scripts.Lee_Sanghyuk
 {
@@ -15,7 +16,7 @@ namespace _02.Scripts.Lee_Sanghyuk
         public TMP_Text ramenSalesCost;
         public int revivalCount;//부활 횟수
 
-        private int _money;//영업중 총소득
+        [FormerlySerializedAs("_money")] public int money;//영업중 총소득
         private int _makeRamenCount;//판매량
         private int _makeTrashCount;//쓰레기양
 
@@ -37,42 +38,44 @@ namespace _02.Scripts.Lee_Sanghyuk
         public void Calculate()
         {
             Time.timeScale = 0;
+            GameManager.Instance.money = 0;
+            GameManager.Instance.time = 0;
             calculateWindow.SetActive(true);
-            totalMoney.text = _money + "₩";
+            totalMoney.text = money + "₩";
             cost.text = "-"+(_makeRamenCount * 3) + "₩";
             trashCost.text ="-"+ _makeTrashCount + "₩";
             revival.text = "-" + (revivalCount * -1) + "₩";
             ramenSalesCost.text = "+"+(_makeRamenCount * 7) + "₩";
-            GameManager.Instance.CalculateMoney(_money);
+            GameManager.Instance.CalculateMoney(money);
         }
 
         private void Start()
         {
-            _money = 30;
-            income.text = _money.ToString();
+            money = 30;
+            income.text = money.ToString();
         }
 
         public void SalesRamen()//라멘판매
         {
             _makeRamenCount++;
-            _money += 4;
-            income.text = _money.ToString();
+            money += 4;
+            income.text = money.ToString();
         }
 
         public void MakeTrash()//쓰레기처리
         {
             _makeTrashCount++;
-            _money--;
-            if (_money<=0)
+            money--;
+            if (money<=0)
             {
                 revivalCount++;
-                _money -= 3;
-                if (_money<=0)
+                money -= 3;
+                if (money<=0)
                 {
                     Calculate();
                 }
             }
-            income.text = _money.ToString();
+            income.text = money.ToString();
         }
     }
 }

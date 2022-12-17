@@ -6,6 +6,7 @@ using UnityEngine;
 public class SaveData
 {
     public int money;
+    public int days;
 }
 
 public class GameManager : MonoBehaviour
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     
     public SaveData saveData;
+    public float time;
+    public int money;
 
     public static GameManager Instance1
     {
