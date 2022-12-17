@@ -62,13 +62,9 @@ public class GameManager : MonoBehaviour
         saveData = JsonUtility.FromJson<SaveData>(jsonData);
     }
     
-    public void GetMoney(int i)
+    public void CalculateMoney(int i)
     {
         saveData.money += i;
-    }
-    
-    public void SpendMoney(int i)
-    {
-        saveData.money -= i;
+        Save();
     }
 }
