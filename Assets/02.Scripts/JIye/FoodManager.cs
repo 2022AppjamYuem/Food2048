@@ -53,6 +53,8 @@ public class FoodManager : MonoBehaviour
     public void TryMerge(Food food1, Food food2)
     {
 
+        if(food1.foodName == "쓰레기" || food2.foodName == "쓰레기") return;
+
         if(food1.foodName == food2.foodName)        //실패한 경우
         {
             //쓰레기
