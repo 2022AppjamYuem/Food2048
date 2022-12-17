@@ -130,19 +130,7 @@ public class FoodManager : MonoBehaviour
         if (food.myFood == receip && food.myLevel >= 4)
         {
             //성공
-/*            var obj = FindObjectsOfType<Food>();
-            for (int i = 0; i < obj.Length; i++)
-            {
-                if (obj[i].foodName=="쓰레기")
-                {
-                    Destroy(obj[i]);
-                    MoneyCount.instance.MakeTrash();
-                }
-
-            }
-            MoneyCount.instance.SalesRamen();
-            DialogueData.instance.OrderEnd();
-*/
+            FlowManager.Instance.MenuSuccess();
             Debug.Log("fddfdgdg");
             return food.gameObject;
         }
