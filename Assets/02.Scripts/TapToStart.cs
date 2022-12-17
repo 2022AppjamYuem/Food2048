@@ -9,6 +9,11 @@ public class TapToStart : MonoBehaviour
     private float fadeTime; // 페이드 되는 시간
     private TMP_Text textFade;  // 페이드 효과에 사용되는 텍스트
 
+    [SerializeField]
+    private RectTransform titlePanelRectTr;
+
+    private bool chageMain;
+
     private void Awake()
     {
         textFade = GetComponent<TMP_Text>();
@@ -21,9 +26,9 @@ public class TapToStart : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && chageMain == false)
         {
-            SceneManager.LoadScene("GameScene");
+            StartCoroutine(MoveTitlePanel());
         }
     }
 
@@ -37,6 +42,27 @@ public class TapToStart : MonoBehaviour
         }
     }
 
+    private IEnumerator MoveTitlePanel()
+    {
+        float current = 0;
+        float percent = 0;
+
+        while (percent < 1)
+        {
+            current += Time.deltaTime;
+            percent = current / 0.5f;
+            
+            titlePanelRectTr.anchoredPosition = Vector2.Lerp(Vector2.zero, new Vector2(-1500, 0), percent);
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        titlePanelRectTr.gameObject.SetActive(false);
+
+        chageMain = true;
+    }
 
     private IEnumerator FadeText(float start, float end)
     {
