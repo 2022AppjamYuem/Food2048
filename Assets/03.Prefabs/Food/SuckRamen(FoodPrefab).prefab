@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6452866252832966107}
   - component: {fileID: 6452866252832966101}
   m_Layer: 0
-  m_Name: Ramen(FoodPrefab)
+  m_Name: SuckRamen(FoodPrefab)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,5 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myLevel: 3
-  foodName: "\uB77C\uBA74"
+  foodName: "\uBA74\uAD6D\uBB3C\uCC28\uC288\uC219\uC8FC"
   nextFood: {fileID: 0}
+  isRamen: 1
+  isTrash: 0
+  isFinal: 1

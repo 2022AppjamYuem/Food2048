@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1e83bf4add3b0448752c2d30751866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myLevel: 3
+  myLevel: 4
   foodName: "\uC640\uC0AC\uBE44"
   nextFood: {fileID: 0}
   isFinal: 0

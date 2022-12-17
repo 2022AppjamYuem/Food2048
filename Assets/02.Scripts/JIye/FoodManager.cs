@@ -51,7 +51,7 @@ public class FoodManager : MonoBehaviour
     public void TryMerge(Food food1, Food food2)
     {
 
-        if(food1.foodName == food2.foodName)
+        if(food1.foodName == food2.foodName)        //실패한 경우
         {
             //쓰레기
             Instantiate(trashPrefab, food1.gameObject.transform.position, Quaternion.identity);
@@ -62,10 +62,24 @@ public class FoodManager : MonoBehaviour
             return;
         }
 
-        if (food1.nextFood != null)
+        if (food1.myLevel >= 4)
         {
-            Merge(food1);
-            Destroy(food2.gameObject);
+            
+
+            if (food1.myLevel == 4)       //기본 라멘에서 추가 제료가 들어가는 상태라면
+            {
+                Food mergeFood = food1.isRamen == true ? food1 : food2;
+                Food deFood = food1.isRamen == false ? food1 : food2;
+                Merge(mergeFood);
+                Destroy(deFood);
+            }
+            else
+            {
+                Merge(food1);
+                Destroy(food2.gameObject);
+            }
+
+
         }
         else
         {
@@ -79,9 +93,10 @@ public class FoodManager : MonoBehaviour
         Transform trans = food.gameObject.transform;
 
 
-        mergeFood = Instantiate(food.nextFood, trans.position, Quaternion.identity).GetComponent<Food>();
 
-        if (mergeFood.isFinal)      //마지막 음식일때 체크
+        mergeFood = Instantiate(food.nextFood[0], trans.position, Quaternion.identity).GetComponent<Food>();
+
+        if (mergeFood.isRamen)      //마지막 음식일때 체크
         {
             CheckReceip(mergeFood);
         }
@@ -92,7 +107,7 @@ public class FoodManager : MonoBehaviour
 
     private void CheckReceip(Food food)
     {
-        if (food.name == receip.name)
+        if (food.foodName == receip.foodName)
         {
             //성공
         }

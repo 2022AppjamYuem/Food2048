@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6452866252832966107}
   - component: {fileID: 6452866252832966101}
   m_Layer: 0
-  m_Name: Chagooknoodle(FoodPrefab)
+  m_Name: HotSource(FoodPrefab)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4468f24eb19377242861d0cda278c4b6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eba1b0a7d1595464bb36f6e3e60573f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1e83bf4add3b0448752c2d30751866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myLevel: 2
-  foodName: "\uCC28\uAD6D\uBB3C"
-  nextFood: {fileID: 6452866252832966104, guid: 6e4203bb157b0844989e2c00ff4a0503, type: 3}
+  myLevel: 4
+  foodName: "\uACE0\uCD94\uAE30\uB984"
+  nextFood: {fileID: 0}
+  isFinal: 0
+  isTrash: 0
