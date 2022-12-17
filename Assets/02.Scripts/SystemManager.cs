@@ -81,31 +81,19 @@ public class SystemManager : MonoBehaviour
                     k = 0;
                     l = 0;
 
-                    // 점수
-                    //if (score > 0)
-                    //{
-                    //    Plus.text = "+" + score.ToString() + "    ";
-                    //    Plus.GetComponent<Animator>().SetTrigger("PlusBack");
-                    //    Plus.GetComponent<Animator>().SetTrigger("Plus");
-                    //    Score.text = (int.Parse(Score.text) + score).ToString();
-                    //    if (PlayerPrefs.GetInt("BestScore", 0) < int.Parse(Score.text)) PlayerPrefs.SetInt("BestScore", int.Parse(Score.text));
-                    //    BestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
-                    //    score = 0;
-                    //}
-
                     for (x = 0; x <= 3; x++) for (y = 0; y <= 3; y++)
                     {
                             // 모든 타일이 가득 차면 k가 0이 됨
                             if (Square[x, y] == null) { k++; continue; }
                             if (Square[x, y].tag == "Combine") Square[x, y].tag = "Untagged";
                     }
-                    //if (k == 0)
-                    //{
-                    //    //가로, 세로 같은 블럭이 없으면 l이 0이 되어서 게임오버
-                    //    for (y = 0; y <= 3; y++) for (x = 0; x <= 2; x++) if (Square[x, y].name == Square[x + 1, y].name) l++;
-                    //    for (x = 0; x <= 3; x++) for (y = 0; y <= 2; y++) if (Square[x, y].name == Square[x, y + 1].name) l++;
-                    //    if (l == 0) { stop = true; Quit.SetActive(true); return; }
-                    //}
+                    if (k == 0)
+                    {
+                        //가로, 세로 같은 블럭이 없으면 l이 0이 되어서 게임오버
+                        for (y = 0; y <= 3; y++) for (x = 0; x <= 2; x++) if (Square[x, y].GetComponent<Food>().myLevel == Square[x + 1, y].GetComponent<Food>().myLevel) l++;
+                        for (x = 0; x <= 3; x++) for (y = 0; y <= 2; y++) if (Square[x, y].name == Square[x, y + 1].name) l++;
+                        if (l == 0) { stop = true;  return; }
+                    }
                 }
             }
         }
@@ -123,19 +111,35 @@ public class SystemManager : MonoBehaviour
             Square[x1, y1] = null;
         }
 
+
+
         // 둘다 같은 수일때 결합
-        if (Square[x1, y1] != null && Square[x2, y2] != null && Square[x1, y1].tag != "Combine" && Square[x2, y2].tag != "Combine")
+        if (Square[x1, y1] != null && Square[x2, y2] != null &&
+            Square[x1, y1].tag != "Combine" && Square[x2, y2].tag != "Combine")
         {
-            move = true;
             Food food1 = Square[x1, y1].GetComponent<Food>();
             Food food2 = Square[x2, y2].GetComponent<Food>();
+
+            if (food1.myLevel != food2.myLevel)
+            {
+                return;
+            }
+
+            move = true;
+
             Square[x2, y2] = FoodManager.instance.TryMerge(food1, food2, new Vector3(interval * x2 - xOffset, interval * y2 + yOffset, 0));
+
+            if (Square[x2,y2].GetComponent<Food>().myLevel == 2 && createChagooknoodle == false)
+            {
+                createChagooknoodle = true;
+            }
 
             //for (j = 0; j <= 16; j++) if (Square[x2, y2].name == n[j].name + "(Clone)") break;
             //Square[x1, y1].GetComponent<Moving>().Move(x2, y2, true);
             //Destroy(Square[x2, y2]);
             //Square[x1, y1] = null;
             //Square[x2, y2] = Instantiate(n[j + 1], new Vector3(interval * x2 - xOffset, interval * y2 - yOffset, 0), Quaternion.identity);
+            
             Debug.Log(Square[x2, y2].gameObject);
             Square[x2, y2].tag = "Combine";
             Square[x2, y2].GetComponent<Animator>().SetTrigger("Combine");
@@ -149,7 +153,7 @@ public class SystemManager : MonoBehaviour
 
         // 처음나올 때 다른 0레벨 재료 
         // 3 단계 이상 나왔을 때 모든 재료 랜덤
-        // 아니면 0 ~ 1단계 재료 랜덤
+        // 아니면 0 ~ 1단계 재료 랜덤 
 
         if (firstCheck == false) {
             Square[x, y] = Instantiate(foodList[0].foodPrefabs[0], new Vector3(interval * x - xOffset, interval * y + yOffset, 0),

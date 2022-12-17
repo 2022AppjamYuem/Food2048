@@ -28,13 +28,6 @@ public class FoodManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //어디서 트리거?
-        //TryMerge(tempFood1, tempFood2);
-    }
-
     /// <summary>
     /// 스테이지 레시피 설정
     /// </summary>
@@ -71,12 +64,11 @@ public class FoodManager : MonoBehaviour
             else
             {
                 Destroy(food2.gameObject);
-
                 return Merge(food1, Pos);
             }
         }
 
-        return null;
+        return food2.gameObject;
     }
 
     private GameObject Merge(Food food, Vector2 Pos)
