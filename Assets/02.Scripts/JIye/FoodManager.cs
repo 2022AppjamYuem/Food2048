@@ -5,6 +5,9 @@ using UnityEngine;
 public class FoodManager : MonoBehaviour
 {
 
+    [SerializeField] Food tempFood1;
+    [SerializeField] Food tempFood2;
+
     [SerializeField] GameObject[] foodPrefabs;
 
     public static FoodManager instance = null;
@@ -25,14 +28,18 @@ public class FoodManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //어디서 트리거?
+        Merge(tempFood1, tempFood2);
     }
 
     // Update is called once per frame
 
-    public void Merge(Food food)
+    public void Merge(Food food1, Food food2)
     {
-        Transform trans = food.transform;
-        Instantiate(foodPrefabs[food.myLevel + 1], trans.position, Quaternion.identity);
+        Transform trans = food1.gameObject.transform;
+        Instantiate(food1.nextFood, trans.position, Quaternion.identity);
+
+        Destroy(food1.gameObject);
+        Destroy(food2.gameObject);
     }
 }

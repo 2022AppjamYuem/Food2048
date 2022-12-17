@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &542518520 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6452866252832966101, guid: 49701430edcc4664e97c422458c251df, type: 3}
+  m_PrefabInstance: {fileID: 6452866253372598573}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1e83bf4add3b0448752c2d30751866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &993553704
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,6 +275,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc62c27b25b56994a88c980c53049088, type: 3}
+--- !u!114 &1575476972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6452866252832966101, guid: bc62c27b25b56994a88c980c53049088, type: 3}
+  m_PrefabInstance: {fileID: 1277779410}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1e83bf4add3b0448752c2d30751866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1588013857
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +315,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15a39dbcba37d4741a6c5e9ed9ccd33a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrefabs: []
+  tempFood1: {fileID: 542518520}
+  tempFood2: {fileID: 1575476972}
+  foodPrefabs:
+  - {fileID: 6452866252832966104, guid: 49701430edcc4664e97c422458c251df, type: 3}
+  - {fileID: 6452866252832966104, guid: bc62c27b25b56994a88c980c53049088, type: 3}
 --- !u!4 &1588013859
 Transform:
   m_ObjectHideFlags: 0
