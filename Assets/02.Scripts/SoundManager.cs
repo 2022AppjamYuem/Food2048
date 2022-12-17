@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _02.Scripts.Lee_Sanghyuk;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,7 +17,7 @@ public class SoundManager : MonoBehaviour
 
         if (null == instance)
         {
-            //ÀÌ Å¬·¡½º ÀÎ½ºÅÏ½º°¡ Åº»ıÇßÀ» ¶§ Àü¿ªº¯¼ö instance¿¡ °ÔÀÓ¸Å´ÏÀú ÀÎ½ºÅÏ½º°¡ ´ã°ÜÀÖÁö ¾Ê´Ù¸é, ÀÚ½ÅÀ» ³Ö¾îÁØ´Ù.
+            //ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ Åºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ instanceï¿½ï¿½ ï¿½ï¿½ï¿½Ó¸Å´ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Ù¸ï¿½, ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
@@ -67,5 +68,10 @@ public class SoundManager : MonoBehaviour
         bgmAudioSource.loop = true;
         bgmAudioSource.volume = 0.1f;
         bgmAudioSource.Play();
+    }
+
+    public void VolumCtrl(float i)//ìŠ¬ë¼ì´ë”
+    {
+        bgmAudioSource.volume = i;
     }
 }
