@@ -17,6 +17,7 @@ namespace _02.Scripts.Lee_Sanghyuk
     {
         public TMP_Text orderText;
         public GameObject NPC;
+        public GameObject tspeechbubble;
         public FoodEnum receip;
 
         public static DialogueData instance;
@@ -54,7 +55,7 @@ namespace _02.Scripts.Lee_Sanghyuk
         public void Order()
         {
             NPC.SetActive(true);
-            NPC.transform.DOMove(new Vector3(1,1,1), 1).OnComplete(() =>
+            NPC.transform.DOMove(new Vector3(-1.36f,1,0), 1).OnComplete(() =>
             {
                 int orderDetails = 0;
                 var selectMenu = Random.Range(0, 3);
@@ -70,7 +71,7 @@ namespace _02.Scripts.Lee_Sanghyuk
                         orderDetails = 2;
                         break;
                 }
-                orderText.gameObject.SetActive(true);
+                tspeechbubble.gameObject.SetActive(true);
                 orderText.text = _menuName[orderDetails];
                 receip = (FoodEnum)(selectMenu);
                 FoodManager.instance.SetReceip(receip);
@@ -81,9 +82,9 @@ namespace _02.Scripts.Lee_Sanghyuk
 
         public void OrderEnd()
         {
-            NPC.transform.DOMove(new Vector3(1,1,1), 1).OnComplete(() =>
+            NPC.transform.DOMove(new Vector3(-3.8f,1,1), 1).OnComplete(() =>
             {
-                orderText.gameObject.SetActive(false);
+                tspeechbubble.SetActive(false);
                 NPC.SetActive(false);
                 Order();
             });
