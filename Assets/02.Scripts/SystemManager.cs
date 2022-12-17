@@ -1,10 +1,18 @@
+using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
+[Serializable]
+public class FoodLevel
+{
+    public GameObject[] foodPrefabs;
+}
 
 public class SystemManager : MonoBehaviour
 {
-    public GameObject[] n;
+    public List<FoodLevel> foodList = new List<FoodLevel>();
     public GameObject Quit;
     public Text Score, BestScore, Plus;
 
@@ -13,21 +21,27 @@ public class SystemManager : MonoBehaviour
     Vector3 firstPos, gap;
     GameObject[,] Square = new GameObject[4, 4];
 
-    float xOffset = 1.62f;
-    float yOffset = 1.62f;
-    float interval = 1.078f;
+    float xOffset = 1.3631f;
+    float yOffset = -3.019f;
+    float interval = 0.8971f;
+
+    private bool firstCheck;
+    private bool createChagooknoodle;
 
     // x 1.62
     // y 1.62
 
-    // 1.62 - 0.542 = 1.078
+    // 1.3631 - 0.466 = 0.8971
 
 
     void Start()
     {
+        firstCheck = false;
+        createChagooknoodle = false;
+
         Spawn();
-        Spawn();
-        //BestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
+
+        firstCheck = true;
     }
 
     void Update()
@@ -63,34 +77,22 @@ public class SystemManager : MonoBehaviour
                 if (move)
                 {
                     move = false;
-                    Spawn();
+                    Spawn(); 
                     k = 0;
                     l = 0;
 
-                    // 점수
-                    //if (score > 0)
-                    //{
-                    //    Plus.text = "+" + score.ToString() + "    ";
-                    //    Plus.GetComponent<Animator>().SetTrigger("PlusBack");
-                    //    Plus.GetComponent<Animator>().SetTrigger("Plus");
-                    //    Score.text = (int.Parse(Score.text) + score).ToString();
-                    //    if (PlayerPrefs.GetInt("BestScore", 0) < int.Parse(Score.text)) PlayerPrefs.SetInt("BestScore", int.Parse(Score.text));
-                    //    BestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
-                    //    score = 0;
-                    //}
-
                     for (x = 0; x <= 3; x++) for (y = 0; y <= 3; y++)
-                        {
+                    {
                             // 모든 타일이 가득 차면 k가 0이 됨
                             if (Square[x, y] == null) { k++; continue; }
                             if (Square[x, y].tag == "Combine") Square[x, y].tag = "Untagged";
-                        }
+                    }
                     if (k == 0)
                     {
                         //가로, 세로 같은 블럭이 없으면 l이 0이 되어서 게임오버
-                        for (y = 0; y <= 3; y++) for (x = 0; x <= 2; x++) if (Square[x, y].name == Square[x + 1, y].name) l++;
+                        for (y = 0; y <= 3; y++) for (x = 0; x <= 2; x++) if (Square[x, y].GetComponent<Food>().myLevel == Square[x + 1, y].GetComponent<Food>().myLevel) l++;
                         for (x = 0; x <= 3; x++) for (y = 0; y <= 2; y++) if (Square[x, y].name == Square[x, y + 1].name) l++;
-                        if (l == 0) { stop = true; Quit.SetActive(true); return; }
+                        if (l == 0) { stop = true;  return; }
                     }
                 }
             }
@@ -109,28 +111,77 @@ public class SystemManager : MonoBehaviour
             Square[x1, y1] = null;
         }
 
+
+
         // 둘다 같은 수일때 결합
-        if (Square[x1, y1] != null && Square[x2, y2] != null && Square[x1, y1].name == Square[x2, y2].name && Square[x1, y1].tag != "Combine" && Square[x2, y2].tag != "Combine")
+        if (Square[x1, y1] != null && Square[x2, y2] != null &&
+            Square[x1, y1].tag != "Combine" && Square[x2, y2].tag != "Combine")
         {
+            Food food1 = Square[x1, y1].GetComponent<Food>();
+            Food food2 = Square[x2, y2].GetComponent<Food>();
+
+            if (food1.myLevel != food2.myLevel)
+            {
+                return;
+            }
+
             move = true;
-            for (j = 0; j <= 16; j++) if (Square[x2, y2].name == n[j].name + "(Clone)") break;
-            Square[x1, y1].GetComponent<Moving>().Move(x2, y2, true);
-            Destroy(Square[x2, y2]);
-            Square[x1, y1] = null;
-            Square[x2, y2] = Instantiate(n[j + 1], new Vector3(interval * x2 - xOffset, interval * y2 - yOffset, 0), Quaternion.identity);
+
+            Square[x2, y2] = FoodManager.instance.TryMerge(food1, food2, new Vector3(interval * x2 - xOffset, interval * y2 + yOffset, 0));
+
+            if (Square[x2,y2].GetComponent<Food>().myLevel == 2 && createChagooknoodle == false)
+            {
+                createChagooknoodle = true;
+            }
+
+            //for (j = 0; j <= 16; j++) if (Square[x2, y2].name == n[j].name + "(Clone)") break;
+            //Square[x1, y1].GetComponent<Moving>().Move(x2, y2, true);
+            //Destroy(Square[x2, y2]);
+            //Square[x1, y1] = null;
+            //Square[x2, y2] = Instantiate(n[j + 1], new Vector3(interval * x2 - xOffset, interval * y2 - yOffset, 0), Quaternion.identity);
+            
+            Debug.Log(Square[x2, y2].gameObject);
             Square[x2, y2].tag = "Combine";
             Square[x2, y2].GetComponent<Animator>().SetTrigger("Combine");
-            score += (int)Mathf.Pow(2, j + 2);
         }
     }
 
     // 스폰
     void Spawn()
     {
-        while (true) { x = Random.Range(0, 4); y = Random.Range(0, 4); if (Square[x, y] == null) break; }
-        Square[x, y] = Instantiate(n[0], new Vector3(interval * x - xOffset, interval * y - yOffset, 0), Quaternion.identity);
-        
-        //Square[x, y] = Instantiate(Random.Range(0, int.Parse(Score.text) > 800 ? 4 : 8) > 0 ? n[0] : n[1], new Vector3(interval * x - xOffset, interval * y - yOffset, 0), Quaternion.identity);
+        while (true) { x = UnityEngine.Random.Range(0, 4); y = UnityEngine.Random.Range(0, 4); if (Square[x, y] == null) break; }
+
+        // 처음나올 때 다른 0레벨 재료 
+        // 3 단계 이상 나왔을 때 모든 재료 랜덤
+        // 아니면 0 ~ 1단계 재료 랜덤 
+
+        if (firstCheck == false) {
+            Square[x, y] = Instantiate(foodList[0].foodPrefabs[0], new Vector3(interval * x - xOffset, interval * y + yOffset, 0),
+                Quaternion.identity);
+            Square[x, y].GetComponent<Animator>().SetTrigger("Spawn");
+
+            while (true) { x = UnityEngine.Random.Range(0, 4); y = UnityEngine.Random.Range(0, 4); if (Square[x, y] == null) break; }
+
+            Square[x, y] = Instantiate(foodList[0].foodPrefabs[1], new Vector3(interval * x - xOffset, interval * y + yOffset, 0),
+                Quaternion.identity);
+            Square[x, y].GetComponent<Animator>().SetTrigger("Spawn");
+
+            return;
+        }
+        else if (createChagooknoodle == false)  // 3단계가 없다면 
+        {
+            int randomFoodList = UnityEngine.Random.Range(0, 2);
+            Square[x, y] = Instantiate(foodList[randomFoodList].foodPrefabs[UnityEngine.Random.Range(0, foodList[randomFoodList].foodPrefabs.Length)], 
+                new Vector3(interval * x - xOffset, interval * y + yOffset, 0), Quaternion.identity);
+        }
+        else
+        {
+            int randomFoodList = UnityEngine.Random.Range(0, foodList.Count);
+            Square[x, y] = Instantiate(foodList[randomFoodList].foodPrefabs[UnityEngine.Random.Range(0, foodList[randomFoodList].foodPrefabs.Length)],
+                new Vector3(interval * x - xOffset, interval * y + yOffset, 0), Quaternion.identity);
+        }
+
         Square[x, y].GetComponent<Animator>().SetTrigger("Spawn");
     }
+
 }
