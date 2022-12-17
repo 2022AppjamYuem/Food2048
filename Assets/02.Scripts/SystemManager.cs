@@ -26,7 +26,7 @@ public class SystemManager : MonoBehaviour
     float interval = 0.8971f;
 
     private bool firstCheck;
-    private bool createChagooknoodle;
+    private int maxLevel;
 
     // x 1.62
     // y 1.62
@@ -37,7 +37,7 @@ public class SystemManager : MonoBehaviour
     void Start()
     {
         firstCheck = false;
-        createChagooknoodle = false;
+        maxLevel = 0;
 
         Spawn();
 
@@ -128,9 +128,9 @@ public class SystemManager : MonoBehaviour
 
             GameObject food = FoodManager.instance.TryMerge(food1, food2, new Vector3(interval * x2 - xOffset, interval * y2 + yOffset, 0));
 
-            if (food.GetComponent<Food>().myLevel == 3 && createChagooknoodle == false)
+            if (food.GetComponent<Food>().myLevel > maxLevel)
             {
-                createChagooknoodle = true;
+                maxLevel = food.GetComponent<Food>().myLevel;
             }
 
             //for (j = 0; j <= 16; j++) if (Square[x2, y2].name == n[j].name + "(Clone)") break;
@@ -165,18 +165,13 @@ public class SystemManager : MonoBehaviour
 
             return;
         }
-        else if (createChagooknoodle == false)  // 4단계가 없다면 
+        else // 4단계가 없다면 
         {
-            int randomFoodList = UnityEngine.Random.Range(0, 3);
+            int randomFoodList = UnityEngine.Random.Range(0, maxLevel + 1);
             Square[x, y] = Instantiate(foodList[randomFoodList].foodPrefabs[UnityEngine.Random.Range(0, foodList[randomFoodList].foodPrefabs.Length)], 
                 new Vector3(interval * x - xOffset, interval * y + yOffset, 0), Quaternion.identity);
         }
-        else
-        {
-            int randomFoodList = UnityEngine.Random.Range(0, foodList.Count);
-            Square[x, y] = Instantiate(foodList[randomFoodList].foodPrefabs[UnityEngine.Random.Range(0, foodList[randomFoodList].foodPrefabs.Length)],
-                new Vector3(interval * x - xOffset, interval * y + yOffset, 0), Quaternion.identity);
-        }
+
 
         Square[x, y].GetComponent<Animator>().SetTrigger("Spawn");
     }
