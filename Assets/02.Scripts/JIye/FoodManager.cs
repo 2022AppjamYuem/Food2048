@@ -1,17 +1,16 @@
 using _02.Scripts.Lee_Sanghyuk;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class FoodManager : MonoBehaviour
 {
-
     public static FoodManager instance = null;
 
     public FoodEnum receip;
     [SerializeField] GameObject trashPrefab;
+
+    public FlowManager flowManager;
 
     private void Awake()
     {
@@ -50,6 +49,7 @@ public class FoodManager : MonoBehaviour
             //Destroy(food2.gameObject);
 
             //쓰레기
+            MoneyCount.instance.MakeTrash();
             return trashPrefab;
         }
 
@@ -127,7 +127,7 @@ public class FoodManager : MonoBehaviour
         if (food.myFood == receip && food.myLevel >= 4)
         {
             //성공
-            FlowManager.Instance.MenuSuccess();
+            flowManager.MenuSuccess();
             Debug.Log("fddfdgdg");
             return food.gameObject;
         }
