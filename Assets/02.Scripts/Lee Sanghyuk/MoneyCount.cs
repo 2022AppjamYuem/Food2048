@@ -37,15 +37,16 @@ namespace _02.Scripts.Lee_Sanghyuk
         
         public void Calculate()
         {
+            money -= 5; // 하루 가게세
             Time.timeScale = 0;
             GameManager.Instance.money = 0;
             GameManager.Instance.time = 0;
             calculateWindow.SetActive(true);
-            totalMoney.text = money + "₩";
-            cost.text = "-"+(_makeRamenCount * 3) + "₩";
-            trashCost.text ="-"+ _makeTrashCount + "₩";
-            revival.text = "-" + (revivalCount * -1) + "₩";
-            ramenSalesCost.text = "+"+(_makeRamenCount * 7) + "₩";
+            totalMoney.text = money + "$";
+            cost.text = "-"+(_makeRamenCount * 3) + "$";
+            trashCost.text ="-"+ _makeTrashCount + "$";
+            revival.text = "-" + (revivalCount * -1) + "$";
+            ramenSalesCost.text = "+"+(_makeRamenCount * 7) + "$";
             GameManager.Instance.CalculateMoney(money);
         }
 
