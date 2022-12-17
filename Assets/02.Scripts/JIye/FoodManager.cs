@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class FoodManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class FoodManager : MonoBehaviour
 
     public static FoodManager instance = null;
 
+    public Food receip;
+    [SerializeField] GameObject trashPrefab;
 
     private void Awake()
     {
@@ -28,25 +31,76 @@ public class FoodManager : MonoBehaviour
     void Start()
     {
         //어디서 트리거?
-        Merge(tempFood1, tempFood2);
+        TryMerge(tempFood1, tempFood2);
     }
 
-    // Update is called once per frame
-
-    public void Merge(Food food1, Food food2)
+    /// <summary>
+    /// 스테이지 레시피 설정
+    /// </summary>
+    /// <param name="food"></param>
+    private void SetReceip(Food food)
     {
-        Transform trans = food1.gameObject.transform;
+        receip = food;
+    }
+
+    /// <summary>
+    /// merge 가능한지 체크
+    /// </summary>
+    /// <param name="food1"></param>
+    /// <param name="food2"></param>
+    public void TryMerge(Food food1, Food food2)
+    {
+
+        if(food1.foodName == food2.foodName)
+        {
+            //쓰레기
+            Instantiate(trashPrefab, food1.gameObject.transform.position, Quaternion.identity);
+
+            Destroy(food1.gameObject);
+            Destroy(food2.gameObject);
+
+            return;
+        }
 
         if (food1.nextFood != null)
         {
-            Instantiate(food1.nextFood, trans.position, Quaternion.identity);
+            Merge(food1);
+            Destroy(food2.gameObject);
         }
         else
         {
-
         }
 
-        Destroy(food1.gameObject);
-        Destroy(food2.gameObject);
     }
+
+    private void Merge(Food food)
+    {
+        Food mergeFood = null;
+        Transform trans = food.gameObject.transform;
+
+
+        mergeFood = Instantiate(food.nextFood, trans.position, Quaternion.identity).GetComponent<Food>();
+
+        if (mergeFood.isFinal)      //마지막 음식일때 체크
+        {
+            CheckReceip(mergeFood);
+        }
+
+
+        Destroy(food.gameObject);
+    }
+
+    private void CheckReceip(Food food)
+    {
+        if (food.name == receip.name)
+        {
+            //성공
+        }
+        else
+        {
+            //실패 => 쓰레기
+            Instantiate(trashPrefab, food.gameObject.transform.position, Quaternion.identity);
+        }
+    }
+
 }
