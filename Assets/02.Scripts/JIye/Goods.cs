@@ -14,14 +14,16 @@ public class Goods : MonoBehaviour
 
     bool bought;
 
-    SpriteRenderer spriteRenderer;
+    Image image;
+    TMP_Text nameText;
     Button button;
     
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        image = GetComponent<Image>();
         button = GetComponent<Button>();
+        nameText = GetComponentInChildren<TMP_Text>();
     }
 
 
@@ -33,7 +35,8 @@ public class Goods : MonoBehaviour
 
     private void Init()
     {
-        spriteRenderer.sprite = goodsSprite;
+        image.sprite = goodsSprite;
+        nameText.text = goodsName;
 
         if (bought)     //이미 구매 된 상태
         {
@@ -47,11 +50,11 @@ public class Goods : MonoBehaviour
     /// </summary>
     public void BuyGoodsBtnClick()
     {
-        if(GameManager.Instance.saveData.money >= price)        //돈이 있을 때
+        if(GameManager.Instance.money >= price)        //돈이 있을 때
         {
-            GameManager.Instance.CalculateMoney(-1 * price);
+            GameManager.Instance.money -= price;
             GameManager.Instance.boughtGoods[index] = true;
-            spriteRenderer.sprite = soldOutSprite;
+            image.sprite = soldOutSprite;
             button.interactable = false;
         }
 

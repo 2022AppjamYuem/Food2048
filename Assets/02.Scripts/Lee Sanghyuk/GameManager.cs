@@ -118,7 +118,10 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < boughtGoods.Length; i++)
         {
-
+            if (boughtGoods[i])
+            {
+                Instantiate(goods[i], goods[i].transform.position, Quaternion.identity);
+            }
         }
     }
 }
