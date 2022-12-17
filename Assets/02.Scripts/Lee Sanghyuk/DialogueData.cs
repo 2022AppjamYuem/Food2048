@@ -1,7 +1,6 @@
 using System.Collections;
 using DG.Tweening;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _02.Scripts.Lee_Sanghyuk
@@ -58,7 +57,7 @@ namespace _02.Scripts.Lee_Sanghyuk
         {
             npcNum = Random.Range(0, 3);
             NPC[npcNum].SetActive(true);
-            NPC[npcNum].transform.DOMove(new Vector3(-1.36f,1,0), 1).OnComplete(() =>
+            NPC[npcNum].transform.DOMove(new Vector3(-1.52f, 1.26f, 0), 1).OnComplete(() =>
             {
                 int orderDetails = 0;
                 var selectMenu = Random.Range(0, 3);
