@@ -11,7 +11,7 @@ public class Goods : MonoBehaviour
     public Sprite soldOutSprite;
     public int price;
     [SerializeField] int index;
-
+    public TMP_Text coinText;
     bool bought;
 
     Image image;
@@ -53,6 +53,7 @@ public class Goods : MonoBehaviour
         if(GameManager.Instance.money >= price)        //µ∑¿Ã ¿÷¿ª ∂ß
         {
             GameManager.Instance.money -= price;
+            coinText.text = GameManager.Instance.money.ToString();
             GameManager.Instance.boughtGoods[index] = true;
             image.sprite = soldOutSprite;
             button.interactable = false;

@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class SaveData
 {
-    public int money;
+    public int money = 30;
     public int days;
-    public bool[] boughtGoods;
+    public bool[] boughtGoods = new bool[3];
 }
 
 public class GameManager : MonoBehaviour
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Goods")]
     [SerializeField] GameObject[] goods;
-    public bool[] boughtGoods;      //구매한 굳즈들 인덱스로 정리
+    public bool[] boughtGoods = new bool[3];      //구매한 굳즈들 인덱스로 정리
 
     public bool isStart;
 
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         Instance = this;
+        Load();
     }
 
     private void Start()

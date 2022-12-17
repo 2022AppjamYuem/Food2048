@@ -52,7 +52,7 @@ namespace _02.Scripts.Lee_Sanghyuk
 
         private void Start()
         {
-            money = 30;
+            money = 0;
             income.text = money.ToString();
         }
 
