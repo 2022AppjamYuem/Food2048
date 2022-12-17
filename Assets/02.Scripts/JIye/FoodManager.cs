@@ -1,3 +1,4 @@
+using _02.Scripts.Lee_Sanghyuk;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -11,7 +12,7 @@ public class FoodManager : MonoBehaviour
 
     public static FoodManager instance = null;
 
-    public Food receip;
+    public FoodEnum receip;
     [SerializeField] GameObject trashPrefab;
 
     private void Awake()
@@ -31,15 +32,16 @@ public class FoodManager : MonoBehaviour
     void Start()
     {
         //어디서 트리거?
-        TryMerge(tempFood1, tempFood2);
+        //TryMerge(tempFood1, tempFood2);
     }
 
     /// <summary>
     /// 스테이지 레시피 설정
     /// </summary>
     /// <param name="food"></param>
-    private void SetReceip(Food food)
+    public void SetReceip(FoodEnum food)
     {
+        Debug.Log(food);
         receip = food;
     }
 
@@ -132,7 +134,7 @@ public class FoodManager : MonoBehaviour
 
     private void CheckReceip(Food food)
     {
-        if (food.foodName == receip.foodName && food.myLevel > 4)
+        if (food.myFood == receip && food.myLevel > 4)
         {
             //성공
         }
