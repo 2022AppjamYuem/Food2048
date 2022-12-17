@@ -1,3 +1,4 @@
+using _02.Scripts.Lee_Sanghyuk;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -12,50 +13,54 @@ public class FoodManager : MonoBehaviour
 
     public static FoodManager instance = null;
 
-    public Food receip;
+    public FoodEnum receip;
     [SerializeField] GameObject trashPrefab;
 
     private void Awake()
     {
-        if (instance == null) //instance°¡ null. Áï, ½Ã½ºÅÛ»ó¿¡ Á¸ÀçÇÏ°í ÀÖÁö ¾ÊÀ»¶§
+        if (instance == null) //instanceê°€ null. ì¦‰, ì‹œìŠ¤í…œìƒì— ì¡´ì¬í•˜ê³  ìˆì§€ ì•Šì„ë•Œ
         {
-            instance = this; //³»ÀÚ½ÅÀ» instance·Î ³Ö¾îÁİ´Ï´Ù.
+            instance = this; //ë‚´ìì‹ ì„ instanceë¡œ ë„£ì–´ì¤ë‹ˆë‹¤.
         }
         else
         {
-            if (instance != this) //instance°¡ ³»°¡ ¾Æ´Ï¶ó¸é ÀÌ¹Ì instance°¡ ÇÏ³ª Á¸ÀçÇÏ°í ÀÖ´Ù´Â ÀÇ¹Ì
-                Destroy(this.gameObject); //µÑ ÀÌ»ó Á¸ÀçÇÏ¸é ¾ÈµÇ´Â °´Ã¼ÀÌ´Ï ¹æ±İ AWakeµÈ ÀÚ½ÅÀ» »èÁ¦
+            if (instance != this) //instanceê°€ ë‚´ê°€ ì•„ë‹ˆë¼ë©´ ì´ë¯¸ instanceê°€ í•˜ë‚˜ ì¡´ì¬í•˜ê³  ìˆë‹¤ëŠ” ì˜ë¯¸
+                Destroy(this.gameObject); //ë‘˜ ì´ìƒ ì¡´ì¬í•˜ë©´ ì•ˆë˜ëŠ” ê°ì²´ì´ë‹ˆ ë°©ê¸ˆ AWakeëœ ìì‹ ì„ ì‚­ì œ
         }
     }
 
     /// <summary>
-    /// ½ºÅ×ÀÌÁö ·¹½ÃÇÇ ¼³Á¤
+    /// ìŠ¤í…Œì´ì§€ ë ˆì‹œí”¼ ì„¤ì •
     /// </summary>
     /// <param name="food"></param>
-    private void SetReceip(Food food)
+    public void SetReceip(FoodEnum food)
     {
+        Debug.Log(food);
         receip = food;
     }
 
     /// <summary>
-    /// merge °¡´ÉÇÑÁö Ã¼Å©
+    /// merge ê°€ëŠ¥í•œì§€ ì²´í¬
     /// </summary>
     /// <param name="food1"></param>
     /// <param name="food2"></param>
     public GameObject TryMerge(Food food1, Food food2, Vector2 Pos)
     {
-        if(food1.foodName == food2.foodName)        //½ÇÆĞÇÑ °æ¿ì
+
+        if(food1.foodName == "ì“°ë ˆê¸°" || food2.foodName == "ì“°ë ˆê¸°") return;
+
+        if(food1.foodName == food2.foodName)        //ì‹¤íŒ¨í•œ ê²½ìš°
         {
             Destroy(food1.gameObject);
             Destroy(food2.gameObject);
 
-            //¾²·¹±â
+            //ì“°ë ˆê¸°
             return Instantiate(trashPrefab, Pos, Quaternion.identity);
         }
 
         if (food1.myLevel == food2.myLevel)
         {
-            if (food1.myLevel == 4)       //±âº» ¶ó¸à¿¡¼­ Ãß°¡ Á¦·á°¡ µé¾î°¡´Â »óÅÂ¶ó¸é
+            if (food1.myLevel == 4)       //ê¸°ë³¸ ë¼ë©˜ì—ì„œ ì¶”ê°€ ì œë£Œê°€ ë“¤ì–´ê°€ëŠ” ìƒíƒœë¼ë©´
             {
                 Food mergeFood = food1.isRamen == true ? food1 : food2;
                 Food deFood = food1.isRamen == false ? food1 : food2;
@@ -78,7 +83,7 @@ public class FoodManager : MonoBehaviour
         mergeFood = Instantiate(food.nextFood[0], Pos, Quaternion.identity).GetComponent<Food>();
 
 
-        if (mergeFood.isRamen)      //¸¶Áö¸· À½½ÄÀÏ¶§ Ã¼Å©
+        if (mergeFood.isRamen)      //ë§ˆì§€ë§‰ ìŒì‹ì¼ë•Œ ì²´í¬
         {
             CheckReceip(mergeFood);
         }
@@ -95,12 +100,12 @@ public class FoodManager : MonoBehaviour
 
         switch (food2.foodName)
         {
-            case "°íÃå±â¸§":
+            case "ê³ ì¶§ê¸°ë¦„":
                 mergeFood = Instantiate(food1.nextFood[0], trans.position, Quaternion.identity).GetComponent<Food>();
 
                 break;
 
-            case "¿Í»çºñ":
+            case "ì™€ì‚¬ë¹„":
                 mergeFood = Instantiate(food1.nextFood[1], trans.position, Quaternion.identity).GetComponent<Food>();
 
                 break;
@@ -108,7 +113,7 @@ public class FoodManager : MonoBehaviour
                 break;
         }
 
-        if (mergeFood.isRamen)      //¸¶Áö¸· À½½ÄÀÏ¶§ Ã¼Å©
+        if (mergeFood.isRamen)      //ë§ˆì§€ë§‰ ìŒì‹ì¼ë•Œ ì²´í¬
         {
             //CheckReceip(mergeFood);
         }
@@ -122,13 +127,13 @@ public class FoodManager : MonoBehaviour
 
     private void CheckReceip(Food food)
     {
-        if (food.foodName == receip.foodName && food.myLevel > 4)
+        if (food.myFood == receip && food.myLevel > 4)
         {
-            //¼º°ø
+            //ì„±ê³µ
         }
         else
         {
-            //½ÇÆĞ => ¾²·¹±â
+            //ì‹¤íŒ¨ => ì“°ë ˆê¸°
             Instantiate(trashPrefab, food.gameObject.transform.position, Quaternion.identity);
         }
     }
