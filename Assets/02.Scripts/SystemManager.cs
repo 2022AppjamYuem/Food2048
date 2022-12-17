@@ -91,7 +91,7 @@ public class SystemManager : MonoBehaviour
                     {
                         //가로, 세로 같은 블럭이 없으면 l이 0이 되어서 게임오버
                         for (y = 0; y <= 3; y++) for (x = 0; x <= 2; x++) if (Square[x, y].GetComponent<Food>().myLevel == Square[x + 1, y].GetComponent<Food>().myLevel) l++;
-                        for (x = 0; x <= 3; x++) for (y = 0; y <= 2; y++) if (Square[x, y].name == Square[x, y + 1].name) l++;
+                        for (x = 0; x <= 3; x++) for (y = 0; y <= 2; y++) if (Square[x, y].GetComponent<Food>().myLevel == Square[x, y + 1].GetComponent<Food>().myLevel) l++;
                         if (l == 0) { stop = true;  return; }
                     }
                 }
@@ -124,23 +124,20 @@ public class SystemManager : MonoBehaviour
             {
                 return;
             }
-
             move = true;
 
-            Square[x2, y2] = FoodManager.instance.TryMerge(food1, food2, new Vector3(interval * x2 - xOffset, interval * y2 + yOffset, 0));
+            GameObject food = FoodManager.instance.TryMerge(food1, food2, new Vector3(interval * x2 - xOffset, interval * y2 + yOffset, 0));
 
-            if (Square[x2,y2].GetComponent<Food>().myLevel == 2 && createChagooknoodle == false)
+            if (food.GetComponent<Food>().myLevel == 3 && createChagooknoodle == false)
             {
                 createChagooknoodle = true;
             }
 
             //for (j = 0; j <= 16; j++) if (Square[x2, y2].name == n[j].name + "(Clone)") break;
-            //Square[x1, y1].GetComponent<Moving>().Move(x2, y2, true);
-            //Destroy(Square[x2, y2]);
-            //Square[x1, y1] = null;
-            //Square[x2, y2] = Instantiate(n[j + 1], new Vector3(interval * x2 - xOffset, interval * y2 - yOffset, 0), Quaternion.identity);
-            
-            Debug.Log(Square[x2, y2].gameObject);
+            Square[x1, y1].GetComponent<Moving>().Move(x2, y2, true);
+            Destroy(Square[x2, y2]);
+            Square[x1, y1] = null;
+            Square[x2, y2] = Instantiate(food, new Vector3(interval * x2 - xOffset, interval * y2 + yOffset, 0), Quaternion.identity);
             Square[x2, y2].tag = "Combine";
             Square[x2, y2].GetComponent<Animator>().SetTrigger("Combine");
         }
@@ -168,9 +165,9 @@ public class SystemManager : MonoBehaviour
 
             return;
         }
-        else if (createChagooknoodle == false)  // 3단계가 없다면 
+        else if (createChagooknoodle == false)  // 4단계가 없다면 
         {
-            int randomFoodList = UnityEngine.Random.Range(0, 2);
+            int randomFoodList = UnityEngine.Random.Range(0, 3);
             Square[x, y] = Instantiate(foodList[randomFoodList].foodPrefabs[UnityEngine.Random.Range(0, foodList[randomFoodList].foodPrefabs.Length)], 
                 new Vector3(interval * x - xOffset, interval * y + yOffset, 0), Quaternion.identity);
         }
