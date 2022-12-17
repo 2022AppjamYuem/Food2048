@@ -551,7 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goodsName: "\uBBF8\uB2C8\uC778\uD615"
   goodsSprite: {fileID: 21300000, guid: 230d011112ee57a488a69c0116180ed1, type: 3}
-  soldOutSprite: {fileID: 0}
+  soldOutSprite: {fileID: 21300000, guid: 4df0dc4184d74b042b56845ede2dce27, type: 3}
   price: 2
   index: 0
 --- !u!1 &625717408
@@ -946,9 +946,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goodsName: "\uBA54\uB274\uD310"
   goodsSprite: {fileID: 21300000, guid: 070bead6d99f9d34e896e00942b04c0f, type: 3}
-  soldOutSprite: {fileID: 0}
+  soldOutSprite: {fileID: 21300000, guid: 4df0dc4184d74b042b56845ede2dce27, type: 3}
   price: 3
-  index: 0
+  index: 2
 --- !u!114 &1155229238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1670,9 +1670,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goodsName: "\uB300\uD615\uC778\uD615"
   goodsSprite: {fileID: 21300000, guid: d8fa52815d0b0684e9970c8d40790e6c, type: 3}
-  soldOutSprite: {fileID: 0}
+  soldOutSprite: {fileID: 21300000, guid: 4df0dc4184d74b042b56845ede2dce27, type: 3}
   price: 4
-  index: 0
+  index: 1
 --- !u!114 &1495530765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2707,6 +2707,30 @@ PrefabInstance:
     - target: {fileID: 8697897674404776202, guid: ffd34d9345270644199cc895083c32e8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697897674404776203, guid: ffd34d9345270644199cc895083c32e8, type: 3}
+      propertyPath: money
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697897674404776203, guid: ffd34d9345270644199cc895083c32e8, type: 3}
+      propertyPath: goods.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697897674404776203, guid: ffd34d9345270644199cc895083c32e8, type: 3}
+      propertyPath: goods.Array.data[0]
+      value: 
+      objectReference: {fileID: 300597500301195578, guid: 64db3f6ddaec1ef4aa4274eecd54ec78, type: 3}
+    - target: {fileID: 8697897674404776203, guid: ffd34d9345270644199cc895083c32e8, type: 3}
+      propertyPath: goods.Array.data[1]
+      value: 
+      objectReference: {fileID: 3917216355474673238, guid: 670262f22a09d4449ba11927f44186e0, type: 3}
+    - target: {fileID: 8697897674404776203, guid: ffd34d9345270644199cc895083c32e8, type: 3}
+      propertyPath: goods.Array.data[2]
+      value: 
+      objectReference: {fileID: 4733376549494372960, guid: 0ffec4d0ef53aed45a9afc4f9322eaee, type: 3}
+    - target: {fileID: 8697897674404776203, guid: ffd34d9345270644199cc895083c32e8, type: 3}
+      propertyPath: boughtGoods.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8697897674404776213, guid: ffd34d9345270644199cc895083c32e8, type: 3}
       propertyPath: m_Name

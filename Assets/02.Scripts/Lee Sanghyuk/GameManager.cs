@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         {
             if (boughtGoods[i])
             {
-                Instantiate(goods[i], transform.position, Quaternion.identity);
+                Instantiate(goods[i], goods[i].transform.position, Quaternion.identity);
             }
         }
     }

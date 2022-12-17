@@ -50,9 +50,9 @@ public class Goods : MonoBehaviour
     /// </summary>
     public void BuyGoodsBtnClick()
     {
-        if(GameManager.Instance.saveData.money >= price)        //µ∑¿Ã ¿÷¿ª ∂ß
+        if(GameManager.Instance.money >= price)        //µ∑¿Ã ¿÷¿ª ∂ß
         {
-            GameManager.Instance.CalculateMoney(-1 * price);
+            GameManager.Instance.money -= price;
             GameManager.Instance.boughtGoods[index] = true;
             image.sprite = soldOutSprite;
             button.interactable = false;
