@@ -102,7 +102,8 @@ MonoBehaviour:
   myLevel: 4
   foodName: "\uACE0\uCDA7\uAE30\uB984"
   nextFood:
-  - {fileID: 0}
+  - {fileID: 6452866252832966104, guid: 7e1ccd1c7aca6c04780c34b6f2fcac2d, type: 3}
+  myFood: 0
   isRamen: 0
   isTrash: 0
 --- !u!114 &498899655025467940

@@ -46,16 +46,14 @@ public class FoodManager : MonoBehaviour
     /// <param name="food2"></param>
     public GameObject TryMerge(Food food1, Food food2, Vector2 Pos)
     {
+        if (food1.foodName == food2.foodName || (food1.foodName == "고춧기름" && food2.foodName == "와사비") || (food2.foodName == "고춧기름" && food1.foodName == "와사비"))        //실패한 경우
 
-        if(food1.foodName == "쓰레기" || food2.foodName == "쓰레기") return null;
-
-        if(food1.foodName == food2.foodName)        //실패한 경우
         {
-            Destroy(food1.gameObject);
-            Destroy(food2.gameObject);
+            //Destroy(food1.gameObject);
+            //Destroy(food2.gameObject);
 
             //쓰레기
-            return Instantiate(trashPrefab, Pos, Quaternion.identity);
+            return trashPrefab;
         }
 
         if (food1.myLevel == food2.myLevel)
@@ -68,7 +66,7 @@ public class FoodManager : MonoBehaviour
             }
             else
             {
-                Destroy(food2.gameObject);
+                //Destroy(food2.gameObject);
                 return Merge(food1, Pos);
             }
         }
@@ -80,8 +78,8 @@ public class FoodManager : MonoBehaviour
     {
         Food mergeFood = null;
 
-        mergeFood = Instantiate(food.nextFood[0], Pos, Quaternion.identity).GetComponent<Food>();
-
+        //mergeFood = Instantiate(food.nextFood[0], Pos, Quaternion.identity).GetComponent<Food>();
+        mergeFood = food.nextFood[0].GetComponent<Food>();
 
         if (mergeFood.isRamen)      //마지막 음식일때 체크
         {
@@ -101,12 +99,14 @@ public class FoodManager : MonoBehaviour
         switch (food2.foodName)
         {
             case "고춧기름":
-                mergeFood = Instantiate(food1.nextFood[0], trans.position, Quaternion.identity).GetComponent<Food>();
+                //mergeFood = Instantiate(food1.nextFood[0], trans.position, Quaternion.identity).GetComponent<Food>();
+                mergeFood = mergeFood = food1.nextFood[0].GetComponent<Food>();
 
                 break;
 
             case "와사비":
                 mergeFood = Instantiate(food1.nextFood[1], trans.position, Quaternion.identity).GetComponent<Food>();
+                mergeFood = mergeFood = food1.nextFood[1].GetComponent<Food>();
 
                 break;
             default:
@@ -115,17 +115,17 @@ public class FoodManager : MonoBehaviour
 
         if (mergeFood.isRamen)      //마지막 음식일때 체크
         {
-            //CheckReceip(mergeFood);
+            CheckReceip(mergeFood);
         }
 
 
-        Destroy(food1.gameObject);
-        Destroy(food2.gameObject);
+        //Destroy(food1.gameObject);
+        //Destroy(food2.gameObject);
 
         return mergeFood.gameObject;
     }
 
-    private void CheckReceip(Food food)
+    private GameObject CheckReceip(Food food)
     {
         if (food.myFood == receip && food.myLevel > 4)
         {
@@ -146,7 +146,7 @@ public class FoodManager : MonoBehaviour
         else
         {
             //실패 => 쓰레기
-            Instantiate(trashPrefab, food.gameObject.transform.position, Quaternion.identity);
+            return trashPrefab;
         }
     }
 
