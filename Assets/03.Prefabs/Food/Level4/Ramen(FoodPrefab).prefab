@@ -100,10 +100,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myLevel: 4
-  foodName: "\uAE30\uBCF8\uB77C\uBA74"
+  foodName: "\uB3C8\uCF54\uCE20\uB77C\uBA58"
   nextFood:
   - {fileID: 6452866252832966104, guid: 7e1ccd1c7aca6c04780c34b6f2fcac2d, type: 3}
   - {fileID: 6452866252832966104, guid: e183abeb7147656458085a7d5fe500b4, type: 3}
+  myFood: 0
   isRamen: 1
   isTrash: 0
 --- !u!114 &-3215151678040403301

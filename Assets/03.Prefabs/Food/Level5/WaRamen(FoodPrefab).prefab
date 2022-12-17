@@ -103,6 +103,7 @@ MonoBehaviour:
   foodName: "\uC640\uC0AC\uBE44\uB77C\uBA74"
   nextFood:
   - {fileID: 0}
+  myFood: 1
   isRamen: 1
   isTrash: 0
 --- !u!95 &2413198763917819143

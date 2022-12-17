@@ -127,10 +127,10 @@ public class FoodManager : MonoBehaviour
 
     private GameObject CheckReceip(Food food)
     {
-        if (food.myFood == receip && food.myLevel > 4)
+        if (food.myFood == receip && food.myLevel >= 4)
         {
             //성공
-            var obj = FindObjectsOfType<Food>();
+/*            var obj = FindObjectsOfType<Food>();
             for (int i = 0; i < obj.Length; i++)
             {
                 if (obj[i].foodName=="쓰레기")
@@ -142,6 +142,9 @@ public class FoodManager : MonoBehaviour
             }
             MoneyCount.instance.SalesRamen();
             DialogueData.instance.OrderEnd();
+*/
+            Debug.Log("fddfdgdg");
+            return food.gameObject;
         }
         else
         {
