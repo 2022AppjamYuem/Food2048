@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveData
 {
     public int money;
     public int days;
+    public bool[] boughtGoods;
 }
 
 public class GameManager : MonoBehaviour
@@ -16,6 +18,11 @@ public class GameManager : MonoBehaviour
     public SaveData saveData;
     public float time;
     public int money;
+
+    [Header("Goods")]
+    [SerializeField] GameObject[] goods;
+    public bool[] boughtGoods;      //구매한 굳즈들 인덱스로 정리
+
 
     public static GameManager Instance1
     {
@@ -48,6 +55,18 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        Init();
+    }
+
+    private void Init()
+    {
+        this.money = saveData.money;
+        //this.days = saveData.days;
+        this.boughtGoods = saveData.boughtGoods;
+    }
+
     public void Save()
     {
         var jsonData = JsonUtility.ToJson(saveData, true);
@@ -69,5 +88,37 @@ public class GameManager : MonoBehaviour
     {
         saveData.money += i;
         Save();
+    }
+
+    #region Scene
+
+    //새로운 씬을 추가
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded; 
+    }
+
+    //새로운 씬 안에 아래 내용을 새로 호출
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.name == "GameScene")
+        {
+            CheckItem();
+        }
+    }
+
+    //게임 종료시
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    #endregion
+
+    private void CheckItem()
+    {
+        for (int i = 0; i < boughtGoods.Length; i++)
+        {
+
+        }
     }
 }

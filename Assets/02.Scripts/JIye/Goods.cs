@@ -10,6 +10,7 @@ public class Goods : MonoBehaviour
     public Sprite goodsSprite;
     public Sprite soldOutSprite;
     public int price;
+    [SerializeField] int index;
 
     bool bought;
 
@@ -49,6 +50,7 @@ public class Goods : MonoBehaviour
         if(GameManager.Instance.saveData.money >= price)        //µ∑¿Ã ¿÷¿ª ∂ß
         {
             GameManager.Instance.CalculateMoney(-1 * price);
+            GameManager.Instance.boughtGoods[index] = true;
             spriteRenderer.sprite = soldOutSprite;
             button.interactable = false;
         }
