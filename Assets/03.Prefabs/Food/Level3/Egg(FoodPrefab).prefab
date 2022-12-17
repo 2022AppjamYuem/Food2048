@@ -103,6 +103,7 @@ MonoBehaviour:
   foodName: "\uACC4\uB780"
   nextFood:
   - {fileID: 6452866252832966104, guid: 89a1e98d81ccb984a800f90d88e12c58, type: 3}
+  myFood: 3
   isRamen: 0
   isTrash: 0
 --- !u!114 &658582004023377449
