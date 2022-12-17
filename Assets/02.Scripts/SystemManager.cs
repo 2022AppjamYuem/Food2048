@@ -25,8 +25,8 @@ public class SystemManager : MonoBehaviour
 
     void Start()
     {
-        Spawn();
-        Spawn();
+        Spawn(0);
+        Spawn(1);
         //BestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
     }
 
@@ -63,7 +63,7 @@ public class SystemManager : MonoBehaviour
                 if (move)
                 {
                     move = false;
-                    Spawn();
+                    //Spawn(); // 임시 주석
                     k = 0;
                     l = 0;
 
@@ -110,25 +110,27 @@ public class SystemManager : MonoBehaviour
         }
 
         // 둘다 같은 수일때 결합
-        if (Square[x1, y1] != null && Square[x2, y2] != null && Square[x1, y1].name == Square[x2, y2].name && Square[x1, y1].tag != "Combine" && Square[x2, y2].tag != "Combine")
+        if (Square[x1, y1] != null && Square[x2, y2] != null && Square[x1, y1].tag != "Combine" && Square[x2, y2].tag != "Combine")
         {
             move = true;
-            for (j = 0; j <= 16; j++) if (Square[x2, y2].name == n[j].name + "(Clone)") break;
-            Square[x1, y1].GetComponent<Moving>().Move(x2, y2, true);
-            Destroy(Square[x2, y2]);
-            Square[x1, y1] = null;
-            Square[x2, y2] = Instantiate(n[j + 1], new Vector3(interval * x2 - xOffset, interval * y2 - yOffset, 0), Quaternion.identity);
+            Food food1 = Square[x1, y1].GetComponent<Food>();
+            Food food2 = Square[x2, y2].GetComponent<Food>();
+            FoodManager.instance.TryMerge(food1, food2, new Vector3(interval * x2 - xOffset, interval * y2 - yOffset, 0));
+            //for (j = 0; j <= 16; j++) if (Square[x2, y2].name == n[j].name + "(Clone)") break;
+            //Square[x1, y1].GetComponent<Moving>().Move(x2, y2, true);
+            //Destroy(Square[x2, y2]);
+            //Square[x1, y1] = null;
+            //Square[x2, y2] = Instantiate(n[j + 1], new Vector3(interval * x2 - xOffset, interval * y2 - yOffset, 0), Quaternion.identity);
             Square[x2, y2].tag = "Combine";
             Square[x2, y2].GetComponent<Animator>().SetTrigger("Combine");
-            score += (int)Mathf.Pow(2, j + 2);
         }
     }
 
     // 스폰
-    void Spawn()
+    void Spawn(int index)
     {
         while (true) { x = Random.Range(0, 4); y = Random.Range(0, 4); if (Square[x, y] == null) break; }
-        Square[x, y] = Instantiate(n[0], new Vector3(interval * x - xOffset, interval * y - yOffset, 0), Quaternion.identity);
+        Square[x, y] = Instantiate(n[index], new Vector3(interval * x - xOffset, interval * y - yOffset, 0), Quaternion.identity);
         
         //Square[x, y] = Instantiate(Random.Range(0, int.Parse(Score.text) > 800 ? 4 : 8) > 0 ? n[0] : n[1], new Vector3(interval * x - xOffset, interval * y - yOffset, 0), Quaternion.identity);
         Square[x, y].GetComponent<Animator>().SetTrigger("Spawn");

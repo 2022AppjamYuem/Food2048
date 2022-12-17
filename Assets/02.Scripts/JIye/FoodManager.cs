@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class FoodManager : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class FoodManager : MonoBehaviour
     void Start()
     {
         //어디서 트리거?
-        TryMerge(tempFood1, tempFood2);
+        //TryMerge(tempFood1, tempFood2);
     }
 
     /// <summary>
@@ -48,13 +49,13 @@ public class FoodManager : MonoBehaviour
     /// </summary>
     /// <param name="food1"></param>
     /// <param name="food2"></param>
-    public void TryMerge(Food food1, Food food2)
+    public void TryMerge(Food food1, Food food2, Vector2 Pos)
     {
 
         if(food1.foodName == food2.foodName)        //실패한 경우
         {
             //쓰레기
-            Instantiate(trashPrefab, food1.gameObject.transform.position, Quaternion.identity);
+            Instantiate(trashPrefab, Pos, Quaternion.identity);
 
             Destroy(food1.gameObject);
             Destroy(food2.gameObject);
@@ -64,8 +65,6 @@ public class FoodManager : MonoBehaviour
 
         if (food1.myLevel == food2.myLevel)
         {
-            
-
             if (food1.myLevel == 4)       //기본 라멘에서 추가 제료가 들어가는 상태라면
             {
                 Food mergeFood = food1.isRamen == true ? food1 : food2;
@@ -74,21 +73,18 @@ public class FoodManager : MonoBehaviour
             }
             else
             {
-                Merge(food1);
+                Merge(food1, Pos);
                 Destroy(food2.gameObject);
             }
-
-
         }
 
     }
 
-    private void Merge(Food food)
+    private void Merge(Food food, Vector2 Pos)
     {
         Food mergeFood = null;
-        Transform trans = food.gameObject.transform;
 
-        mergeFood = Instantiate(food.nextFood[0], trans.position, Quaternion.identity).GetComponent<Food>();
+        mergeFood = Instantiate(food.nextFood[0], Pos, Quaternion.identity).GetComponent<Food>();
 
 
         if (mergeFood.isRamen)      //마지막 음식일때 체크
