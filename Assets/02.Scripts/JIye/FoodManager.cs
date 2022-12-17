@@ -46,10 +46,7 @@ public class FoodManager : MonoBehaviour
     /// <param name="food2"></param>
     public GameObject TryMerge(Food food1, Food food2, Vector2 Pos)
     {
-
-        if(food1.foodName == "쓰레기" || food2.foodName == "쓰레기") return;
-
-        if(food1.foodName == food2.foodName)        //실패한 경우
+        if (food1.foodName == food2.foodName)        //실패한 경우
         {
             Destroy(food1.gameObject);
             Destroy(food2.gameObject);

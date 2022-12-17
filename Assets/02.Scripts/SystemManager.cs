@@ -120,7 +120,7 @@ public class SystemManager : MonoBehaviour
             Food food1 = Square[x1, y1].GetComponent<Food>();
             Food food2 = Square[x2, y2].GetComponent<Food>();
 
-            if (food1.myLevel != food2.myLevel)
+            if (food1.myLevel != food2.myLevel || food1.myLevel == -1 && food2.myLevel == -1)
             {
                 return;
             }
