@@ -5,28 +5,8 @@ using UnityEngine;
 public class Food : MonoBehaviour
 {
     public int myLevel;                   //레벨
-    [SerializeField] Sprite spriteData;         
     [SerializeField] string foodName;       //음식이름
 
-    SpriteRenderer spriteRenderer;
-
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    private void Start()
-    {
-        InitFood();
-    }
-
-    /// <summary>
-    /// 음식 초기화 할때 호출 되는 함수
-    /// </summary>
-    private void InitFood()
-    {
-        spriteRenderer.sprite = spriteData;
-    }
 
     /// <summary>
     /// 음식이 합쳐졌을 때
@@ -49,6 +29,6 @@ public class Food : MonoBehaviour
     /// </summary>
     private void Merge()
     {
-
+        FoodManager.instance.Merge(this);
     }
 }
