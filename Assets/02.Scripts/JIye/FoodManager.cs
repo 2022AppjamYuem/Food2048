@@ -7,9 +7,6 @@ using static UnityEditor.PlayerSettings;
 
 public class FoodManager : MonoBehaviour
 {
-    //Temp
-    [SerializeField] Food tempFood1;
-    [SerializeField] Food tempFood2;
 
     public static FoodManager instance = null;
 

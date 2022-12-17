@@ -44,7 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15a39dbcba37d4741a6c5e9ed9ccd33a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempFood1: {fileID: 0}
-  tempFood2: {fileID: 0}
   receip: 0
-  trashPrefab: {fileID: 0}
+  trashPrefab: {fileID: 6452866252832966104, guid: 9e420bdcef548e84aaf1f4a1de986160, type: 3}
