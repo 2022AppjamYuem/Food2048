@@ -49,18 +49,15 @@ public class FoodManager : MonoBehaviour
     /// </summary>
     /// <param name="food1"></param>
     /// <param name="food2"></param>
-    public void TryMerge(Food food1, Food food2, Vector2 Pos)
+    public GameObject TryMerge(Food food1, Food food2, Vector2 Pos)
     {
-
         if(food1.foodName == food2.foodName)        //실패한 경우
         {
-            //쓰레기
-            Instantiate(trashPrefab, Pos, Quaternion.identity);
-
             Destroy(food1.gameObject);
             Destroy(food2.gameObject);
 
-            return;
+            //쓰레기
+            return Instantiate(trashPrefab, Pos, Quaternion.identity);
         }
 
         if (food1.myLevel == food2.myLevel)
@@ -69,18 +66,20 @@ public class FoodManager : MonoBehaviour
             {
                 Food mergeFood = food1.isRamen == true ? food1 : food2;
                 Food deFood = food1.isRamen == false ? food1 : food2;
-                Merge(mergeFood,deFood);
+                return Merge(mergeFood, deFood);
             }
             else
             {
-                Merge(food1, Pos);
                 Destroy(food2.gameObject);
+
+                return Merge(food1, Pos);
             }
         }
 
+        return null;
     }
 
-    private void Merge(Food food, Vector2 Pos)
+    private GameObject Merge(Food food, Vector2 Pos)
     {
         Food mergeFood = null;
 
@@ -92,11 +91,12 @@ public class FoodManager : MonoBehaviour
             CheckReceip(mergeFood);
         }
 
-
         Destroy(food.gameObject);
+
+        return mergeFood.gameObject;
     }
 
-    private void Merge(Food food1, Food food2)
+    private GameObject Merge(Food food1, Food food2)
     {
         Food mergeFood = null;
         Transform trans = food1.gameObject.transform;
@@ -124,6 +124,8 @@ public class FoodManager : MonoBehaviour
 
         Destroy(food1.gameObject);
         Destroy(food2.gameObject);
+
+        return mergeFood.gameObject;
     }
 
     private void CheckReceip(Food food)
