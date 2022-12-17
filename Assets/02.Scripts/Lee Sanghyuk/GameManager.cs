@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject[] goods;
     public bool[] boughtGoods;      //구매한 굳즈들 인덱스로 정리
 
+    public bool isStart;
 
     public static GameManager Instance1
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.VisualScripting;
 
 public class TapToStart : MonoBehaviour
 {
@@ -21,7 +22,14 @@ public class TapToStart : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(FadeInOut());
+        if (GameManager.Instance.isStart == true)
+        {
+            titlePanelRectTr.gameObject.SetActive(false);
+        }
+        else
+        {
+            StartCoroutine(FadeInOut());
+        }
     }
 
     private void Update()
@@ -44,6 +52,8 @@ public class TapToStart : MonoBehaviour
 
     private IEnumerator MoveTitlePanel()
     {
+        GameManager.Instance.isStart = true;
+
         float current = 0;
         float percent = 0;
 
