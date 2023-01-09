@@ -48,8 +48,6 @@ public class FoodManager : MonoBehaviour
             //Destroy(food1.gameObject);
             //Destroy(food2.gameObject);
 
-            //쓰레기
-            MoneyCount.instance.MakeTrash();
             return trashPrefab;
         }
 

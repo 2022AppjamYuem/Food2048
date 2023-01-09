@@ -18,7 +18,6 @@ namespace _02.Scripts.Lee_Sanghyuk
 
         private void Start()
         {
-            MoneyCount.instance.money = GameManager.Instance.money;
             _playTime = GameManager.Instance.time;
             
             ClockTime();
@@ -37,7 +36,6 @@ namespace _02.Scripts.Lee_Sanghyuk
             }
 
             print("하루끝남");
-            MoneyCount.instance.Calculate();
             GameManager.Instance.time = 0;
         }
 
@@ -64,9 +62,7 @@ namespace _02.Scripts.Lee_Sanghyuk
         // ReSharper disable Unity.PerformanceAnalysis
         public void MenuSuccess()
         {
-            GameManager.Instance.money = MoneyCount.instance.money;
             GameManager.Instance.time = _playTime;
-            MoneyCount.instance.SalesRamen();
             DialogueData.instance.OrderEnd();
             SceneManager.LoadScene("GameScene");
         }
