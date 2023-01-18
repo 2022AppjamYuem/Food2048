@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public SaveData saveData;
     public float time;
     public int money;
-    private int garbageBag;      //¾²·¹±â ºÀÅõ °¹¼ö
+    [SerializeField] private int garbageBag;      //¾²·¹±â ºÀÅõ °¹¼ö
     public int GarbageBag
     {
         get
