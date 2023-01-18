@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +19,23 @@ public class GameManager : MonoBehaviour
     public SaveData saveData;
     public float time;
     public int money;
+    [SerializeField] private int garbageBag;      //쓰레기 봉투 갯수
+    public int GarbageBag
+    {
+        get
+        {
+            return garbageBag;
+        }
+        set
+        {
+
+            if(garbageBag <= 0)
+            {
+                //쓰레기 봉투가 없을 때
+            }
+            garbageBag = value;
+        }
+    }
 
     [Header("Goods")]
     [SerializeField] GameObject[] goods;

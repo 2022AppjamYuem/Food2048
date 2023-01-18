@@ -45,19 +45,37 @@ public class Goods : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        coinText.text = GameManager.Instance.money.ToString();
+
+    }
+
     /// <summary>
     /// 버튼에 연결될 event 함수
     /// </summary>
     public void BuyGoodsBtnClick()
     {
-        if(GameManager.Instance.money >= price)        //돈이 있을 때
+
+        if(goodsName == "쓰레기봉투")
+        {
+            GameManager.Instance.GarbageBag++;
+            GameManager.Instance.money -= price;
+
+        }
+        else
+            BuyGoods();
+
+    }
+
+    private void BuyGoods()
+    {
+        if (GameManager.Instance.money >= price)        //돈이 있을 때
         {
             GameManager.Instance.money -= price;
-            coinText.text = GameManager.Instance.money.ToString();
             GameManager.Instance.boughtGoods[index] = true;
             image.sprite = soldOutSprite;
             button.interactable = false;
         }
-
     }
 }

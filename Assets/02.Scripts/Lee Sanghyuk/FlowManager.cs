@@ -64,7 +64,7 @@ namespace _02.Scripts.Lee_Sanghyuk
         {
             GameManager.Instance.time = _playTime;
             DialogueData.instance.OrderEnd();
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("GameScene");        //씬을 다시 로드 해서 새 주문을 받음
         }
     }
 }
